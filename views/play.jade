@@ -1,0 +1,62 @@
+doctype html
+html
+	head
+		title Monopoly
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
+		link(href="//fonts.googleapis.com/css?family=Oswald:300,400,700,900", rel="stylesheet")
+		link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", rel="stylesheet")
+		link(href="/lib/style.min.css", rel="stylesheet")
+
+	body
+		header
+			h1 Monopoly
+			h2= username
+			h3 £1500
+
+			div(id="notification")
+				span
+
+		form
+			fieldset
+				a(id="pay", class="white", href="#")
+					i(class="fa fa-credit-card")
+					| Pay
+				a(id="receive", class="secondary", href="#")
+					i(class="fa fa-plus")
+					span Receive
+
+			fieldset
+				a(id="go", class="white", href="#")
+					i(class="fa fa-hand-o-right")
+					span Go
+				a(id="parking", class="secondary", href="#")
+					i(class="fa fa-car")
+					span Free Parking
+
+		aside
+			form(data-mode="pay")
+				h1
+
+				ul
+					li
+						a(class="selected", data-id="bank")
+							i(class="fa fa-university")
+							span Bank
+					li
+						a(data-id="fine")
+							i(class="fa fa-car")
+							span Fine
+				
+				div
+					span &pound;
+					input(type="number")
+				
+				a(id="done", href="#")
+					i(class="fa fa-check")
+					span Done
+
+		script(src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+		script(src="/socket.io/socket.io.js")
+		script(src="/lib/script.min.js")
