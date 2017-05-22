@@ -70,7 +70,7 @@ io.on('connection', socket => {
 				} else if (Number.isInteger(players.search('id', data.player))) {
 					players[players.search('id', data.player)].balance += parseInt(data.value)
 
-					io.sockets.connected[data.player].emit('balance', {
+					if (data.player in io.sockets.connected) io.sockets.connected[data.player].emit('balance', {
 						balance: players[players.search('id', data.player)].balance,
 						message: '<i class="fa fa-plus"></i>' + data.value + ' from ' + players[players.search('id', socket.id)].username
 					})
