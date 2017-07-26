@@ -59,28 +59,39 @@ io.on('connection', socket => {
 						message: '<i class="fa fa-minus"></i>' + data.value + ' to Free Parking'
 					})
 
-					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(players[players.search('id', socket.id)].username + ' paid a £' + data.value + ' fine'))
+					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(
+							players[players.search('id', socket.id)].username +
+							' paid a £' + data.value + ' fine'
+					))
 				} else if (data.player == 'bank') {
 					socket.emit('balance', {
 						balance: players[players.search('id', socket.id)].balance,
 						message: '<i class="fa fa-minus"></i>' + data.value + ' to the bank'
 					})
 
-					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(players[players.search('id', socket.id)].username + ' paid £' + data.value + ' to the bank'))
+					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(
+						players[players.search('id', socket.id)].username +
+						' paid £' + data.value + ' to the bank'
+					))
 				} else if (Number.isInteger(players.search('id', data.player))) {
 					players[players.search('id', data.player)].balance += parseInt(data.value)
 
 					if (data.player in io.sockets.connected) io.sockets.connected[data.player].emit('balance', {
 						balance: players[players.search('id', data.player)].balance,
-						message: '<i class="fa fa-plus"></i>' + data.value + ' from ' + players[players.search('id', socket.id)].username
+						message: '<i class="fa fa-plus"></i>' + data.value +' from ' +
+							players[players.search('id', socket.id)].username
 					})
 
 					socket.emit('balance', {
 						balance: players[players.search('id', socket.id)].balance,
-						message: '<i class="fa fa-minus"></i>' + data.value + ' to ' + players[players.search('id', data.player)].username
+						message: '<i class="fa fa-minus"></i>' + data.value + ' to ' +
+							players[players.search('id', data.player)].username
 					})
 
-					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(players[players.search('id', socket.id)].username + ' paid £' + data.value + ' to ' + players[players.search('id', data.player)].username))
+					console.log(timestamp() + chalk.yellow('TRANSFER: ') + chalk.gray(
+						players[players.search('id', socket.id)].username + ' paid £' +
+						data.value + ' to ' + players[players.search('id', data.player)].username
+					))
 				}
 			}
 		}
@@ -96,7 +107,10 @@ io.on('connection', socket => {
 					message: '<i class="fa fa-plus"></i>' + data.value + ' from the bank'
 				})
 
-				console.log(timestamp() + chalk.red('ADD: ') + chalk.gray(players[players.search('id', socket.id)].username + ' received £' + data.value))
+				console.log(timestamp() + chalk.red('ADD: ') + chalk.gray(
+					players[players.search('id', socket.id)].username +
+					' received £' + data.value
+				))
 			}
 		}
 	})
@@ -111,7 +125,9 @@ io.on('connection', socket => {
 					message: '<i class="fa fa-plus"></i>200 for passing Go'
 				})
 
-				console.log(timestamp() + chalk.green('GO: ') + chalk.gray(players[players.search('id', socket.id)].username + ' passed Go'))
+				console.log(timestamp() + chalk.green('GO: ') + chalk.gray(
+					players[players.search('id', socket.id)].username + ' passed Go'
+				))
 			} else if (command == 'parking') {
 				players[players.search('id', socket.id)].balance += parking
 
@@ -122,7 +138,9 @@ io.on('connection', socket => {
 
 				parking = 0
 
-				console.log(timestamp() + chalk.blue('FREE PARKING: ') + chalk.gray(players[players.search('id', socket.id)].username + ' collected Free Parking'))
+				console.log(timestamp() + chalk.blue('FREE PARKING: ') + chalk.gray(
+					players[players.search('id', socket.id)].username + ' collected Free Parking'
+				))
 			}
 		}
 	})
